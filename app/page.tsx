@@ -1,0 +1,41 @@
+"use client";
+
+import { useState } from "react";
+
+const projects = [
+  { num: "01", title: "PRTA Game", arTitle: "لعبة PRTA", type: "Unity Engine · C#", arType: "يونيتي · سي شارب", icon: "◈", copy: "A small Unity game where I got to bring the gameplay and interactions to life.", arCopy: "لعبة صغيرة طورتها بـ Unity، وجربت فيها بناء اللعب والتفاعل من الصفر.", tags: ["Unity", "C#", "OOP"], url: "https://riridiiva.itch.io/pieces-reborn-together-again" },
+  { num: "02", title: "iMega System", arTitle: "نظام آي ميجا", type: "Requirements Engineering", arType: "هندسة المتطلبات", icon: "⌘", copy: "A smart-shopping idea that I turned into clear diagrams, flows, and requirements.", arCopy: "فكرة تسوق ذكية حولتها إلى مخططات وتدفقات ومتطلبات واضحة.", tags: ["UML", "DFD", "Use Cases"], url: "https://drive.google.com/file/d/1TG7TlTQ5_KsTkZbytvAOVjIFLR3-0B2i/view" },
+  { num: "03", title: "FitTrackDB", arTitle: "قاعدة بيانات فيت تراك", type: "Database Design", arType: "تصميم قواعد البيانات", icon: "▦", copy: "A practical database for fitness and nutrition, with clean data and useful queries.", arCopy: "قاعدة بيانات عملية للياقة والتغذية، ببيانات مرتبة واستعلامات مفيدة.", tags: ["SQL", "MySQL", "ERD"], url: "https://drive.google.com/file/d/1uVQu0i_-yFfJTMC1V52WHPo_S7kSCMVP/view" },
+];
+
+function Bi({ en, ar, className = "" }: { en: string; ar: string; className?: string }) {
+  return <><span className={className}>{en}</span><span className={`${className} arabic`} lang="ar" dir="rtl">{ar}</span></>;
+}
+
+export default function Home() {
+  const [active, setActive] = useState(0);
+  const project = projects[active];
+
+  return (
+    <main>
+      <nav><a className="brand" href="#home">RIRI<span>_</span>DEV</a><div className="nav-links"><a href="#projects">work <small lang="ar">الأعمال</small></a><a href="#certifications">certs <small lang="ar">الشهادات</small></a><a href="#tutor">tutor <small lang="ar">التدريس</small></a><a href="#contact">contact <small lang="ar">تواصل</small></a></div><a className="nav-cta" href="mailto:Ramaabdolahalkabi4@gmail.com">say hello · تواصل معي ↗</a></nav>
+
+      <section id="home" className="hero grid-bg">
+        <div className="hero-copy"><p className="eyebrow"><Bi en="Software engineering student · Makkah, SA" ar="طالبة هندسة برمجيات · مكة المكرمة، السعودية" /></p><h1><Bi en="I make ideas feel real." ar="أحوّل الأفكار إلى شيء ملموس." /></h1><p className="intro"><Bi en="Hey, I’m Rama — a software engineering student who loves building things, figuring them out, and helping others do the same." ar="هلا، أنا راما — طالبة هندسة برمجيات وأحب أبني أفكار جديدة، أفهمها، وأساعد غيري يفهمها بعد." /></p><div className="hero-actions"><a href="#projects" className="button primary">see my work · استكشف أعمالي <b>↓</b></a><a href="#tutor" className="text-link">my teaching corner · ركني التعليمي <span>→</span></a></div></div>
+        <div className="hero-art"><div className="orbit orbit-one">AI <span>✦</span> vision</div><div className="orbit orbit-two">Python <span>⌘</span> Java</div><div className="code-card">&lt; create /&gt;<br /><span>with intention</span></div><div className="avatar-wrap"><div className="hello">hello! <i>✦</i></div><img src="/rama-hello.webp" alt="Rama's Bitmoji" /></div><div className="music-note">♫</div><div className="guitar">𝄞</div><p className="art-caption">CODE · AI · MUSIC</p></div>
+        <div className="scroll-note">SCROLL TO EXPLORE <span>↓</span></div>
+      </section>
+
+      <section id="projects" className="projects"><div className="section-head"><p className="eyebrow"><Bi en="A few things I made" ar="أشياء اشتغلت عليها" /></p><h2><Bi en="Made with a little obsession." ar="مصنوعة بحب وشغف." /></h2><p><Bi en="Some are games, some are systems — all of them taught me something new." ar="بعضها ألعاب وبعضها أنظمة، وكل واحد منها علمني شيء جديد." /></p></div>
+        <div className="roadmap"><div className="road-line" />{projects.map((item, index) => <button key={item.title} onClick={() => setActive(index)} className={`road-item ${active === index ? "selected" : ""}`}><span className="road-dot">{item.num}</span><span className="road-title">{item.title}<small lang="ar">{item.arTitle}</small></span><span className="road-type">{item.type}<small lang="ar">{item.arType}</small></span></button>)}</div>
+        <article className="project-card"><div className="project-art"><span>{project.icon}</span><p>{project.type}<small className="arabic" lang="ar">{project.arType}</small></p><div className="corner-code">{active === 0 ? "PlayerController.cs" : active === 1 ? "system.map()" : "SELECT * FROM goals;"}</div></div><div className="project-detail"><p className="project-index">PROJECT {project.num} / 03 · المشروع</p><h3>{project.title}<small className="arabic" lang="ar">{project.arTitle}</small></h3><p>{project.copy}<span className="arabic" lang="ar" dir="rtl">{project.arCopy}</span></p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><a className="project-link" href={project.url} target="_blank" rel="noreferrer">view project · عرض المشروع <span>↗</span></a></div></article>
+      </section>
+
+      <section id="certifications" className="certifications"><div className="cert-head"><p className="eyebrow"><Bi en="Learning mode: always on" ar="التعلّم مستمر" /></p><h2><Bi en="A little more AI in my toolkit." ar="المزيد من الذكاء الاصطناعي في أدواتي." /></h2></div><div className="cert-grid"><article className="cert-card featured"><div className="cert-badge"><p className="cert-mark">KAUST<br />ACADEMY</p><img src="/kaust-advanced.png" alt="Advanced Artificial Intelligence certificate from KAUST Academy" /></div><div><p className="cert-meta">40 HOURS · FEB 2026</p><h3>Advanced Artificial Intelligence<small className="arabic" lang="ar">الذكاء الاصطناعي المتقدم</small></h3><p><Bi en="Computer vision, datasets, augmentation, transfer learning, image segmentation, and object detection." ar="الرؤية الحاسوبية، مجموعات البيانات، تعزيز البيانات، التعلّم بالنقل، تجزئة الصور واكتشاف الكائنات." /></p></div><span className="cert-number">01</span></article><article className="cert-card"><div className="cert-badge"><p className="cert-mark">KAUST<br />ACADEMY</p><img src="/kaust-intro.png" alt="Introduction to Artificial Intelligence certificate from KAUST Academy" /></div><div><p className="cert-meta">40 HOURS · JAN 2026 · DISTINCTION</p><h3>Introduction to Artificial Intelligence<small className="arabic" lang="ar">مقدمة في الذكاء الاصطناعي — بامتياز</small></h3><p><Bi en="Machine-learning foundations and algorithms, deep learning basics, and unsupervised learning." ar="أساسيات وخوارزميات تعلّم الآلة، مبادئ التعلّم العميق والتعلّم غير الخاضع للإشراف." /></p></div><span className="cert-number">02</span></article></div></section>
+
+      <section id="tutor" className="tutor"><div className="tutor-visual"><div className="telegram-mark">✈</div><div className="floating-chip chip-a">UML</div><div className="floating-chip chip-b">SQL</div><div className="floating-chip chip-c">python</div><img src="/rama-star.webp" alt="Rama's Bitmoji with star eyes" /></div><div className="tutor-copy"><p className="eyebrow">Riri Explains · ريري تشرح</p><h2><Bi en="Learning, made simple." ar="التعلّم ببساطة." /></h2><p><Bi en="I simplify tech topics in a quick, easy way. Interested in the services I offer? You’re welcome in my channel." ar="أبسط المواضيع التقنية بطريقة سهلة وسريعة — إذا كانت الخدمات اللي أقدمها تهمك، أهلًا بك في قناتي." /></p><a className="button light" href="https://t.me/ririexplains" target="_blank" rel="noreferrer">visit the Telegram channel · زيارة القناة <b>↗</b></a></div></section>
+
+      <footer id="contact"><div><p className="eyebrow">Got an idea? · عندك فكرة؟</p><h2><Bi en="Let’s make it happen." ar="خلّينا نحولها لواقع." /></h2></div><div className="contact-links"><a href="mailto:Ramaabdolahalkabi4@gmail.com">Ramaabdolahalkabi4@gmail.com <span>↗</span></a><a href="tel:+966595136780">+966 595 136 780 <span>↗</span></a><a href="https://www.linkedin.com/in/rama-alhuthali" target="_blank" rel="noreferrer">LinkedIn / rama-alhuthali <span>↗</span></a></div><div className="footer-bottom"><span>© 2026 RIRI DEV</span><span>MAKKAH, SAUDI ARABIA · مكة المكرمة</span><a href="#home">BACK TO TOP · العودة للأعلى ↑</a></div></footer>
+    </main>
+  );
+}
